@@ -19,7 +19,7 @@
       register: system_print
 
     - name: Printing if it's CHR or RB
-      debug: 
+      debug:
         var: system_print.stdout_lines[0][0]
 
     - name: Checking RouterOS Version before Updating (both CHR and RB)
@@ -28,12 +28,12 @@
       register: routeros_resources_before_updating
 
     - name: Printing RouterOS Version before Updating (both CHR and RB)
-      debug: 
+      debug:
         var: routeros_resources_before_updating.stdout_lines[0][1]
 
     - name: Updating CHR RouterOS Immediatelly if RouterOS Version < {{ version }}
       include: UpdateRouterOS-CHR.yml
-      when: 
+      when:
         - "'no' in system_print.stdout_lines[0][0]"
         - routeros_resources_before_updating.stdout_lines[0][1] != item
       with_items:
@@ -46,13 +46,13 @@
       when: "'yes' in system_print.stdout_lines[0][0]"
 
     - name: Printing RB Flash Bad-Blocks Ammount
-      debug: 
+      debug:
         var: routeros_resources.stdout_lines[0][14]
       when: "'yes' in system_print.stdout_lines[0][0]"
 
     - name: Updating RB RouterOS and Firmware if Bad-Blocks Ammount == 0% and RouterOS Version < {{ version }}
       include: UpdateRouterOS-RB.yml
-      when: 
+      when:
         - "'yes' in system_print.stdout_lines[0][0]"
         - "'0%' in routeros_resources.stdout_lines[0][14]"
         - routeros_resources_before_updating.stdout_lines[0][1] != item
@@ -65,7 +65,7 @@
       register: routeros_resources_after_updating
 
     - name: Printing RouterOS Version after Updating (both CHR and RB)
-      debug: 
+      debug:
         var: routeros_resources_after_updating.stdout_lines[0][1]
 
     - name: Checking Firmware Version after Updating (refers to RB only)
@@ -74,7 +74,7 @@
       register: system_print_after_updating
 
     - name: Printing Firmware Version after Updating (RB only)
-      debug: 
+      debug:
         msg:
           - factory-firmware {{ system_print_after_updating.stdout_lines[0][5] }}
           - current-firmware {{ system_print_after_updating.stdout_lines[0][6] }}
@@ -84,4 +84,4 @@
     - name: FINISH
       debug:
         msg: "---------------------------------------------DO YOU HAVE ANYTHING ELSE FOR ME??????---------------------------------------------"
-      
+
