@@ -1,5 +1,5 @@
 # MikroTik-RouterOS-Update-Ansible
-Updating MikroTik RouterOS Devices be using Ansible (both CHR and RB)
+Updating MikroTik RouterOS Devices by using Ansible (both CHR and RB)
 
 <h1>What?</h1>
 
