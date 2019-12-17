@@ -3,18 +3,23 @@ Updating MikroTik RouterOS Devices be using Ansible (both CHR and RB)
 
 <h1>What?</h1>
 
-Updating RouterOS by using Ansible
+- Updating RouterOS by using Ansible
 
 <h1>Where?</h1>
 
 - Tested on Ansible 2.9.1
 - RouterOS version no lower than 6.45 due to the use of sftp to transfer files
 
+<h1>How?</h1>
+
+- Just start playbook <b>RouterOS-Update.yml</b>
+- Playbooks <b>BackupRouterOS.yml</b>, <b>UpdateRouterOS-RB.yml</b>, <b>UpdateRouterOS-CHR.yml</b> are needed for work
+
 <h1>Warning!</h1>
 
 - I use ssh keys for authentication in example (and strictly recommend it)
-- Before using check the value of {{ version }} variable in group_vars/all.yml
-- The specific format of this value is needed. See example from repository
+- Before using check the value of <b>{{ version }}</b> variable in group_vars/all.yml
+- The <b>specific format</b> of this value is needed. See example from repository
 
 <h1>How does it work?</h1>
 
