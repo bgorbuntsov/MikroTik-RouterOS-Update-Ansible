@@ -12,9 +12,9 @@ Updating RouterOS by using Ansible
 
 <h1>Warning!</h1>
 
-- I use ssh keys for authentication in example (and strictly recommend it).
+- I use ssh keys for authentication in example (and strictly recommend it)
 - Before using check the value of {{ version }} variable in group_vars/all.yml
-- The specific format of this value is needed. See example from repository.
+- The specific format of this value is needed. See example from repository
 
 <h1>How does it work?</h1>
 
