@@ -1,6 +1,6 @@
 ---
 - name: UPDATING (CHR only)
-  debug: 
+  debug:
     msg:
       - "------------------------------------------------------------I'm CHR! Let's update ME! ------------------------------------------------------------"
 
@@ -10,10 +10,11 @@
 
 - name: CHR Rebooting and RouterOS Updating
   routeros_command:
-    commands: 
+    commands:
       - /system script remove ANSIBLE_REBOOT_SCRIPT
       - /system scheduler remove numbers=[find where name =ANSIBLE_REBOOT_SCHEDULER]
-      - /system script add name=ANSIBLE_REBOOT_SCRIPT owner=ansible source="/system scheduler remove numbers=[find where name =ANSIBLE_REBOOT_SCHEDULER];:delay 5;/system reboot" dont-require-permissions=yes
+      - /system script add name=ANSIBLE_REBOOT_SCRIPT owner=ansible >
+         source="/system scheduler remove numbers=[find where name =ANSIBLE_REBOOT_SCHEDULER];:delay 5;/system reboot" dont-require-permissions=yes
       - /system scheduler add name=ANSIBLE_REBOOT_SCHEDULER start-date=Jan/01/1900 on-event="/system script run ANSIBLE_REBOOT_SCRIPT" interval=10
 
 - name: Waiting while CHR Rebooting and RouterOS Updating
@@ -26,6 +27,6 @@
       - /system script remove ANSIBLE_REBOOT_SCRIPT
 
 - name: SUMMARY (CHR only)
-  debug: 
+  debug:
     msg:
       - "----------------------------------------- MikroTik Cloud Hoster Router Updating Tasks have been done!!! -----------------------------------------"

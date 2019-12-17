@@ -1,6 +1,6 @@
 ---
 - name: UPDATING (RB only)
-  debug: 
+  debug:
     msg:
       - "------------------------------------------------------------I'm RB! Let's update ME! ------------------------------------------------------------"
 
@@ -10,10 +10,11 @@
 
 - name: RB Rebooting and RouterOS Updating
   routeros_command:
-    commands: 
+    commands:
       - /system script remove ANSIBLE_REBOOT_SCRIPT
       - /system scheduler remove numbers=[find where name =ANSIBLE_REBOOT_SCHEDULER]
-      - /system script add name=ANSIBLE_REBOOT_SCRIPT owner=ansible source="/system scheduler remove numbers=[find where name =ANSIBLE_REBOOT_SCHEDULER];:delay 5;/system reboot" dont-require-permissions=yes
+      - /system script add name=ANSIBLE_REBOOT_SCRIPT owner=ansible >
+         source="/system scheduler remove numbers=[find where name =ANSIBLE_REBOOT_SCHEDULER];:delay 5;/system reboot" dont-require-permissions=yes
       - /system scheduler add name=ANSIBLE_REBOOT_SCHEDULER start-date=Nov/01/2019 on-event="/system script run ANSIBLE_REBOOT_SCRIPT" interval=10
 
 - name: Waiting while RB Rebooting and RouterOS Updating
@@ -25,20 +26,22 @@
     commands:
       - /system script remove ANSIBLE_UPGRADE_SCRIPT
       - /system scheduler remove numbers=[find where name =ANSIBLE_UPGRADE_SCHEDULER]
-      - /system script add name=ANSIBLE_UPGRADE_SCRIPT owner=ansible source="/system scheduler remove numbers=[find where name =ANSIBLE_UPGRADE_SCHEDULER];/system routerboard upgrade;:delay 60s;/system reboot" dont-require-permissions=yes
+      - /system script add name=ANSIBLE_UPGRADE_SCRIPT owner=ansible >
+         source="/system scheduler remove numbers=[find where name =ANSIBLE_UPGRADE_SCHEDULER];/system routerboard upgrade;>
+         :delay 60s;/system reboot" dont-require-permissions=yes
       - /system scheduler add name=ANSIBLE_UPGRADE_SCHEDULER start-date=Nov/01/2019 on-event="/system script run ANSIBLE_UPGRADE_SCRIPT" interval=10
 
 - name: Waiting while RB Rebooting
   pause:
     minutes: 2
 
-- name: Cleaning after RB RouterOS and Firmware Updating 
+- name: Cleaning after RB RouterOS and Firmware Updating
   routeros_command:
     commands:
       - /system script remove ANSIBLE_REBOOT_SCRIPT
       - /system script remove ANSIBLE_UPGRADE_SCRIPT
 
 - name: SUMMARY (RB only)
-  debug: 
+  debug:
     msg:
       - "--------------------------------------------- MikroTik RouterBoard Updating Tasks have been done!!! ---------------------------------------------"
