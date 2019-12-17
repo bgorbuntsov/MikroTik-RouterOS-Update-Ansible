@@ -7,14 +7,14 @@ Updating RouterOS by using Ansible
 
 <h1>Where?</h1>
 
-Tested on Ansible 2.9.1</n>
-RouterOS version no lower than 6.45 due to the use of sftp to transfer files
+- Tested on Ansible 2.9.1
+- RouterOS version no lower than 6.45 due to the use of sftp to transfer files
 
 <h1>Warning!</h1>
 
-I use ssh keys for authentication in example (and strictly recommend it).
-Before using check the value of {{ version }} variable in group_vars/all.yml
-The specific format of this value is needed. See example from repository.
+- I use ssh keys for authentication in example (and strictly recommend it).
+- Before using check the value of {{ version }} variable in group_vars/all.yml
+- The specific format of this value is needed. See example from repository.
 
 <h1>How does it work?</h1>
 
@@ -32,4 +32,4 @@ General Steps:
 
 <h1>What to do?</h1>
 
-Just enjoy!
+- Just enjoy!
